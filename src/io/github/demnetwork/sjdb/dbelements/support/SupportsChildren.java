@@ -34,9 +34,13 @@ import io.github.demnetwork.sjdb.dbelements.DBElement;
 public interface SupportsChildren {
     public DBElement<?> getByName(String Name);
 
+    public DBElement<?> getByName(String Name, int depth);
+
     public Object get(int index);
 
     public void set(int index, Object data);
 
     public boolean hasObjectWithName(String name);
+
+    public boolean hasObjectWithName(String name, int depth);
 }

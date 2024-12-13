@@ -94,6 +94,7 @@ public final class DBRootElement extends DBElement<Object[]> implements Supports
         throw new NoSuchElementException("The element with name \'" + Name + "\' was not found");
     }
 
+    @Override
     public boolean hasObjectWithName(String Name) throws NullPointerException {
         if (Name == null) {
             throw new NullPointerException("\'Name\' cannot be null");
@@ -103,6 +104,70 @@ public final class DBRootElement extends DBElement<Object[]> implements Supports
                 NameProperty np = (NameProperty) data[i];
                 if (np.getName().equals(Name) && np instanceof DBElement<?>) {
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public DBElement<?> getByName(String Name, int depth)
+            throws NullPointerException, NoSuchElementException, IllegalArgumentException {
+        if (Name == null) {
+            throw new NullPointerException("\'Name\' cannot be null");
+        }
+        int cDepth = depth;
+        if (cDepth <= 0) {
+            throw new IllegalArgumentException("Depth cannot be less than or equal 0");
+        }
+        for (int i = 0; (!(i >= this.data.length)); i++) {
+            if (this.data[i] instanceof DBElement<?>) {
+                if (data[i] instanceof NameProperty) {
+                    NameProperty np = (NameProperty) data[i];
+                    if (np.getName().equals(Name)) {
+                        return (DBElement<?>) data[i];
+                    }
+                }
+                if (data[i] instanceof SupportsChildren) {
+                    if ((cDepth - 1) >= 0) {
+                        cDepth = cDepth - 1;
+                        SupportsChildren sc = (SupportsChildren) data[i];
+                        try {
+                            return sc.getByName(Name, cDepth);
+                        } catch (NoSuchElementException err) {
+                            cDepth = cDepth + 1;
+                        }
+                    }
+                }
+            }
+        }
+        throw new NoSuchElementException("The element with name \'" + Name + "\' was not found");
+    }
+
+    @Override
+    public boolean hasObjectWithName(String Name, int depth) throws NullPointerException {
+        if (Name == null) {
+            throw new NullPointerException("\'Name\' cannot be null");
+        }
+        if (depth <= 0) {
+            throw new IllegalArgumentException("Depth cannot be less than or equal 0");
+        }
+        int cDepth = depth;
+        for (int i = 0; !(i >= this.data.length); i++) {
+            if (data[i] instanceof DBElement<?>) {
+                if (data[i] instanceof NameProperty) {
+                    NameProperty np = (NameProperty) data[i];
+                    if (np.getName().equals(Name)) {
+                        return true;
+                    }
+                }
+                if (data[i] instanceof SupportsChildren) {
+                    if ((cDepth - 1) >= 1) {
+                        SupportsChildren sc = (SupportsChildren) data[i];
+                        if (sc.hasObjectWithName(Name, (cDepth - 1))) {
+                            return true;
+                        }
+                    }
                 }
             }
         }

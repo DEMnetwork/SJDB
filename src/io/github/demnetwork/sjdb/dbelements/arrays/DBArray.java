@@ -21,30 +21,30 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.dbelements.property;
+package io.github.demnetwork.sjdb.dbelements.arrays;
 
-/**
- * When this interface is implmented by a class it can have names.
- */
-public interface NameProperty {
-    /**
-     * Used to get the name of the
-     * {@link io.github.demnetwork.sjdb.dbelements.DBElement
-     * DBElement}
-     * 
-     * @return The name of the {@link io.github.demnetwork.sjdb.dbelements.DBElement
-     *         DBElement}
-     */
-    public String getName();
+import io.github.demnetwork.sjdb.dbelements.DBElement;
 
-    /**
-     * Used to set the name of the
-     * {@link io.github.demnetwork.sjdb.dbelements.DBElement
-     * DBElement}
-     * 
-     * @param name The new name of the
-     *             {@link io.github.demnetwork.sjdb.dbelements.DBElement
-     *             DBElement}
-     */
-    public void setName(String name);
+public class DBArray extends DBElement<Object[]> {
+    private Object[] cData;
+    private Object[] nData;
+
+    public DBArray() {
+        cData = new Object[1];
+    }
+
+    public void set(Object data, int index) {
+        if (index >= cData.length) {
+            nData = new Object[index + 1];
+            for (int i = 0; i < cData.length; i++) {
+                nData[i] = cData[i];
+            }
+            nData[index] = data;
+            cData = nData;
+        } else if (index < 0) {
+            throw new ArrayIndexOutOfBoundsException("The index(" + index + ") is negative");
+        } else {
+            cData[index] = data;
+        }
+    }
 }
