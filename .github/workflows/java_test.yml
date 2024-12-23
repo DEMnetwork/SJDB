@@ -19,4 +19,4 @@ jobs:
       uses: actions/setup-java@v2
       with:
         distribution: 'oracle'
-        java-version: '18'
+        java-version: '18.0.2.1'
