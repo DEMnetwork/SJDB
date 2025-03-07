@@ -21,14 +21,33 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.injection;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
+import java.security.Permission;
+
+public class InjectionPermission extends Permission {
+    public InjectionPermission(String name) {
+        super(name);
     }
 
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
+    @Override
+    public boolean implies(Permission permission) {
+        return this.getName().equals(permission.getName());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof InjectionPermission && this.getName().equals(((InjectionPermission) obj).getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
+
+    @Override
+    public String getActions() {
+        return "Injection";
+    }
+
 }

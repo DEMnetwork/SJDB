@@ -23,12 +23,8 @@
 
 package io.github.demnetwork.sjdb.exceptions;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
-
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
+public class UnknownPropertyException extends RuntimeException {
+    public UnknownPropertyException() {
+        super("Unknown Property!");
     }
 }

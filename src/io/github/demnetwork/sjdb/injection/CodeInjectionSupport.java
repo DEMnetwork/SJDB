@@ -21,14 +21,15 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.injection;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
+public interface CodeInjectionSupport {
+    public void Inject(CodeInjectionSupport.InjectionLocation InjectionLocation, InjectableCode code);
 
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
+    /**
+     * A marker interface for Locations to inject
+     */
+    public interface InjectionLocation {
+
     }
 }

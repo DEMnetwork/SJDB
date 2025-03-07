@@ -26,7 +26,10 @@ package io.github.demnetwork.sjdb.dbelements.property;
 /**
  * When this interface is implmented by a class it can have names.
  */
-public interface NameProperty {
+public interface NameProperty extends PropertyInterface {
+    public static final int BUILD_NUMBER = 1;
+    public static final String VERSION = "v1.0.0";
+
     /**
      * Used to get the name of the
      * {@link io.github.demnetwork.sjdb.dbelements.DBElement
@@ -47,4 +50,14 @@ public interface NameProperty {
      *             DBElement}
      */
     public void setName(String name);
+
+    public static String validateName(String s) {
+        if (s == null) {
+            return "null";
+        }
+        if (s.contains("\'")) {
+            return s.replace("\'", "\"");
+        }
+        return s;
+    }
 }

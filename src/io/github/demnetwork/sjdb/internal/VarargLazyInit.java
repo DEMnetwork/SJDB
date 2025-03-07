@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2024 DEMnetwork
+ *   Copyright (c) 2025 DEMnetwork
  *   All rights reserved.
 
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,14 +21,33 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.internal;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
+import java.util.Arrays;
+
+public abstract class VarargLazyInit<T, V> extends LazyInit<T> {
+    protected final int varargsLength;
+
+    @SafeVarargs
+    protected VarargLazyInit(Object[] args, V... varargs) {
+        super(conjunctArray(args.clone(), varargs.clone()));
+        this.varargsLength = varargs.length;
     }
 
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
+    protected static final <V> Object[] conjunctArray(Object[] args, V[] varargs) {
+        Object[] array = new Object[args.length + varargs.length];
+        for (int i = 0; i < args.length; i++) {
+            array[i] = args[i];
+        }
+        for (int i = args.length; i++ < varargs.length;) {
+            array[i] = varargs[i - args.length];
+        }
+        return array;
     }
+
+    @SuppressWarnings("unchecked")
+    protected final V[] getVarargs() {
+        return (V[]) Arrays.copyOfRange(super.initArgs, super.initArgs.length - varargsLength, super.initArgs.length);
+    }
+
 }

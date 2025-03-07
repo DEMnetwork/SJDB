@@ -23,12 +23,26 @@
 
 package io.github.demnetwork.sjdb.exceptions;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
+import io.github.demnetwork.sjdb.dbelements.property.Properties.DBElementPropertySupport;
+
+public class UnsupportedPropertyException extends RuntimeException {
+    private final DBElementPropertySupport property;
+
+    public UnsupportedPropertyException() {
+        super("This element does not support this property");
+        this.property = null;
     }
 
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
+    public UnsupportedPropertyException(DBElementPropertySupport property) {
+        super("This element does not support \'" + property.getName() + "\' Property!");
+        this.property = property;
+    }
+
+    public DBElementPropertySupport getProperty() {
+        if (this.property == null) {
+            throw new NullPointerException("The property was not supplied on initalization");
+        } else {
+            return this.property;
+        }
     }
 }

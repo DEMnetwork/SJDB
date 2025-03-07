@@ -21,14 +21,7 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.injection;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
-
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
-    }
+public interface InjectableCode {
 }

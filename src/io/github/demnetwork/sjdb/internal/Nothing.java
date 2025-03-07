@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2024 DEMnetwork
+ *   Copyright (c) 2025 DEMnetwork
  *   All rights reserved.
 
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,14 +21,22 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.internal;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
-
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
+/**
+ * A Class that cannot be instantiated that represents Nothing
+ * 
+ * @see java.base/java.lang.Void
+ */
+@SJDBInternal("Nothing")
+final class Nothing {
+    /**
+     * Nothing constructor
+     * 
+     * @throws java.lang.UnsupportedOperationException Whenever the constructor is
+     *                                                 invoked
+     */
+    private Nothing() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Unsupported Constructor");
     }
 }

@@ -33,9 +33,11 @@ import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
-public class AES {
-    private int KEY_LENGTH;
-    private int ITERATION_COUNT;
+public final class AES {
+    private final int KEY_LENGTH;
+    private final int ITERATION_COUNT;
+    public static final int BUILD_NUMBER = 1;
+    public static final String VERSION = "v1.0.0";
 
     public AES(int key_length, int iteration_count) {
         this.KEY_LENGTH = key_length;
@@ -43,8 +45,10 @@ public class AES {
     }
 
     public String encrypt(String strToEncrypt, String secretKey, String salt) throws Throwable {
+        // System.out.println("Secret Key(Encryption): " + secretKey);
         SecureRandom secureRandom = new SecureRandom();
         byte[] iv = new byte[16];
+        // System.out.println("IV(Encryption): " + iv);
         secureRandom.nextBytes(iv);
         IvParameterSpec ivspec = new IvParameterSpec(iv);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
@@ -61,8 +65,11 @@ public class AES {
     }
 
     public String decrypt(String strToDecrypt, String secretKey, String salt) throws Throwable {
+        // System.out.println("Secret Key(Decryption): " + secretKey);
+        // System.out.println(strToDecrypt);
         byte[] encryptedData = Base64.getDecoder().decode(strToDecrypt);
         byte[] iv = new byte[16];
+        // System.out.println("IV(Decryption): " + iv);
         System.arraycopy(encryptedData, 0, iv, 0, iv.length);
         IvParameterSpec ivspec = new IvParameterSpec(iv);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");

@@ -23,11 +23,20 @@
 
 package io.github.demnetwork.sjdb.dbelements;
 
-public class DBElement<T> {
+import io.github.demnetwork.sjdb.dbelements.property.Properties;
+
+public class DBElement<T> extends java.lang.Object {
+    public static final int BUILD_NUMBER = 1;
+    public static final String VERSION = "v1.0.0";
+
     private T data;
 
     public DBElement() {
         this.data = null;
+    }
+
+    public DBElement(T data) {
+        this.data = data;
     }
 
     public T get() {
@@ -39,5 +48,9 @@ public class DBElement<T> {
 
     public void set(T data) {
         this.data = data;
+    }
+
+    public final Properties getProperties() {
+        return new Properties(this);
     }
 }

@@ -23,12 +23,8 @@
 
 package io.github.demnetwork.sjdb.exceptions;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
-
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
+public class BadDataBaseState extends RuntimeException {
+    public BadDataBaseState() {
+        super("The database is not in a good state");
     }
 }

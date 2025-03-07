@@ -27,4 +27,12 @@ public class IllegalDatabaseFormat extends RuntimeException {
     public IllegalDatabaseFormat() {
         super("The Database is not formatted correctly");
     }
+
+    public IllegalDatabaseFormat(String msg) {
+        super(msg);
+    }
+
+    public IllegalDatabaseFormat(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 }

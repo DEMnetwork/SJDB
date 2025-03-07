@@ -21,14 +21,12 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.dbelements.property;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
-
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
-    }
+/**
+ * This is a marker interface that all Property Interfaces inherit
+ */
+public interface PropertyInterface {
+    public static final int BUILD_NUMBER = 1;
+    public static final String VERSION = "v1.0.0";
 }

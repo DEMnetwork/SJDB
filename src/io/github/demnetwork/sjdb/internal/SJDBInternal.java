@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2024 DEMnetwork
+ *   Copyright (c) 2025 DEMnetwork
  *   All rights reserved.
 
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,14 +21,13 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.internal;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
+import java.lang.annotation.*;
+import static java.lang.annotation.ElementType.*;
 
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ TYPE })
+@interface SJDBInternal {
+    String value(); // Name of the class
 }

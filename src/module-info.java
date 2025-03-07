@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2024 DEMnetwork
+ *   Copyright (c) 2025 DEMnetwork
  *   All rights reserved.
 
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,14 +21,19 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+open module io.github.demnetwork.sjdb {
+    exports io.github.demnetwork.sjdb; // Main package
+    exports io.github.demnetwork.sjdb.cryptography; // Cryptography support
+    exports io.github.demnetwork.sjdb.dbelements; // Main Database Element package
+    exports io.github.demnetwork.sjdb.dbelements.arrays; // Database Elements that represent a Array
+    exports io.github.demnetwork.sjdb.dbelements.property; // Database Element property
+    exports io.github.demnetwork.sjdb.dbelements.support; // Database Element support for misclaneous things
+    exports io.github.demnetwork.sjdb.dbelements.table; // Database table elements
+    exports io.github.demnetwork.sjdb.logging; // Database Logging access
+    exports io.github.demnetwork.sjdb.internal; // Allow access to internal API
+    exports io.github.demnetwork.sjdb.exceptions; // Database Exceptions
+    exports io.github.demnetwork.sjdb.injection; // Database Code Injection(Not activliy used)
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
-
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
-    }
+    requires java.base;
+    requires jdk.unsupported;
 }

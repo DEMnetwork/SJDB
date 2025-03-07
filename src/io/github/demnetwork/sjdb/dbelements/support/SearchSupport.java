@@ -21,14 +21,21 @@
  *   SOFTWARE.
  */
 
-package io.github.demnetwork.sjdb.exceptions;
+package io.github.demnetwork.sjdb.dbelements.support;
 
-public class BadCredentialsException extends RuntimeException {
-    public BadCredentialsException() {
-        super("The Credentials are Invalid");
-    }
+import java.util.NoSuchElementException;
 
-    public BadCredentialsException(String msg, Throwable err) {
-        super(msg, err);
-    }
+import io.github.demnetwork.sjdb.dbelements.DBElement;
+
+public interface SearchSupport {
+    public static final int BUILD_NUMBER = 1;
+    public static final String VERSION = "v1.0.0";
+
+    public DBElement<?> search(String Name) throws NoSuchElementException;
+
+    public DBElement<?> search(DBElement<?> e) throws NoSuchElementException;
+
+    public DBElement<?> search(DBElement<?> e, int depth) throws NoSuchElementException;
+
+    public DBElement<?> search(String Name, int depth) throws NoSuchElementException;
 }

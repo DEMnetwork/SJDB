@@ -32,6 +32,9 @@ import io.github.demnetwork.sjdb.dbelements.DBElement;
  * @since SJDB v1.0.0
  */
 public interface SupportsChildren {
+    public static final int BUILD_NUMBER = 1;
+    public static final String VERSION = "v1.0.0";
+
     public DBElement<?> getByName(String Name);
 
     public DBElement<?> getByName(String Name, int depth);
