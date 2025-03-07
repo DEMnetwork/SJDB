@@ -23,4 +23,11 @@
                 </plugin>
             </plugins>
     </build>
+
+<distributionManagement>
+    <repository>
+        <id>github</id> <!-- This should match the server-id in your settings.xml -->
+        <url>https://maven.pkg.github.com/DEMNetwork/SJDB</url>
+    </repository>
+</distributionManagement>
 </project>
